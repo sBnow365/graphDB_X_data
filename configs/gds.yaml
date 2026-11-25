@@ -1,0 +1,36 @@
+projection:
+  name: user_interactions
+  include_isolated_users: false
+  # Weights are analytical choices; document any change in your report.
+  weights:
+    RETWEETED: 1.0
+    REPLIED_TO: 1.0
+    QUOTED: 1.0
+    MENTIONED: 0.5
+    RETWEETED_USER: 1.0        # user-level retweet edges (Hateful Users dataset)
+  max_relationships_guard: 5000000   # refuse to project bigger graphs on a laptop
+louvain:
+  write_property: louvain_community
+  max_levels: 10
+  tolerance: 0.0001
+  include_intermediate_communities: false
+pagerank:
+  write_property: pagerank
+  damping_factor: 0.85
+  max_iterations: 20
+degree:
+  write_property: degree
+betweenness:
+  write_property: betweenness
+  sampling_size: 500        # sampled betweenness for larger graphs
+  max_nodes_exact: 5000
+community_analysis:
+  min_users: 5
+  # Investigation-priority weights (ANALYTICAL CHOICES, not validated thresholds).
+  priority_weights:
+    hate_share: 0.4
+    spam_share: 0.2
+    offensive_share: 0.15
+    pre_election_growth: 0.15
+    internal_density: 0.1
+    hateful_user_share: 0.4    # share of HUMAN-annotated users labelled hateful (Hateful Users only)

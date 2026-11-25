@@ -1,0 +1,5 @@
+# Optional: Transformer classifier inference / fine-tuning.
+# Install PyTorch FIRST using the selector at https://pytorch.org/get-started/locally/
+# (CPU build is fine for inference on small batches).
+transformers>=4.45 #loading pre trained hate-speech cllassifier
+accelerate>=0.30   #speed up model loading

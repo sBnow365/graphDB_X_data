@@ -1,0 +1,7 @@
+user_id,hate,hate_neigh,normal_neigh,statuses_count,extra_feature
+0,hateful,True,False,100,0.1
+1,hateful,True,True,50,0.2
+2,normal,False,True,10,0.3
+3,normal,False,True,20,0.4
+4,other,True,False,5,0.5
+5,other,False,False,7,0.6

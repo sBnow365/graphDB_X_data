@@ -1,0 +1,30 @@
+# # HASOC (FIRE). Files differ by year/language; set the columns to match YOUR file.
+# # 2019/2021 data: https://hasocfire.github.io/hasoc/2019/dataset.html , .../2021/dataset.html
+# dataset_source: hasoc
+# role: classifier_only
+# files:
+#   data_file: data/raw/hasoc/en_2021_train.tsv   # .tsv, .csv or .xlsx
+# read_options:
+#   sep: "\t"                 # ignored for .xlsx
+# columns:                     # [verify] typical names; edit to match your file header
+#   id: _id
+#   text: text
+#   coarse_label: task_1       # HOF / NOT
+#   fine_label: task_2         # HATE / OFFN / PRFN / NONE (optional; set null if absent)
+# language: en
+# capabilities: {text: true, user_ids: false, timestamps: false, interactions: false, follows: false, labels: true}
+
+
+
+dataset_source: hasoc
+role: classifier_only
+files:
+  data_file: data/raw/hasoc/english_dataset.tsv
+read_options:
+  sep: "\t"
+columns:
+  id: text_id
+  text: text
+  coarse_label: task_1
+  fine_label: task_2
+language: en

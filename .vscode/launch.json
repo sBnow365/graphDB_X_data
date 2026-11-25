@@ -1,0 +1,115 @@
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     { "name": "1. Offline demo (no DB, no LLM)", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/run_demo.py", "args": ["--offline"], "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" },
+//     { "name": "2. Generate synthetic data", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/generate_synthetic_data.py", "console": "integratedTerminal" },
+//     { "name": "3. Initialize Neo4j", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/initialize_neo4j.py", "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" },
+//     { "name": "4. Demo with Neo4j, no LLM", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/run_demo.py", "args": ["--no-llm"], "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" },
+//     { "name": "5. Ask a question (Graph RAG)", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/ask.py", "args": ["${input:question}"], "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" },
+//     { "name": "6. Full demo with Qwen", "type": "debugpy", "request": "launch",
+//       "program": "${workspaceFolder}/scripts/run_demo.py", "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" },
+//     { "name": "Debug current file", "type": "debugpy", "request": "launch",
+//       "program": "${file}", "console": "integratedTerminal", "envFile": "${workspaceFolder}/.env" }
+//   ],
+//   "inputs": [
+//     { "id": "question", "type": "promptString", "description": "Question for the graph",
+//       "default": "Which communities contain a high proportion of hate-labelled posts?" }
+//   ]
+// }
+
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "0. Dashboard (Streamlit)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": [
+        "run",
+        "app/streamlit_app.py"
+      ],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "1. Offline demo (no DB, no LLM)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/run_demo.py",
+      "args": [
+        "--offline"
+      ],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "2. Generate synthetic data",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/generate_synthetic_data.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "3. Initialize Neo4j",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/initialize_neo4j.py",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "4. Demo with Neo4j, no LLM",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/run_demo.py",
+      "args": [
+        "--no-llm"
+      ],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "5. Ask a question (Graph RAG)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/ask.py",
+      "args": [
+        "${input:question}"
+      ],
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "6. Full demo with Qwen",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/run_demo.py",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Debug current file",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "question",
+      "type": "promptString",
+      "description": "Question for the graph",
+      "default": "Which communities contain a high proportion of hate-labelled posts?"
+    }
+  ]
+}

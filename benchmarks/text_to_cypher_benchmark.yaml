@@ -1,0 +1,101 @@
+# Text-to-Cypher benchmark on the SYNTHETIC graph (election date 2025-03-15, Asia/Kolkata).
+# status: drafted  -> written against the schema but NOT yet executed/checked by a human.
+# status: verified -> you ran gold_cypher in Neo4j Browser and checked the rows manually.
+# key_columns: column(s) whose VALUES are compared (generated column names may differ).
+items:
+  - id: q01
+    category: label+date
+    status: drafted
+    question: "Which users posted hate-labelled content during the ten days before the configured election date?"
+    params: {start: "2025-03-04T18:30:00+00:00", end: "2025-03-14T18:30:00+00:00", label: "HATE"}
+    key_columns: [user_id]
+    gold_cypher: |
+      MATCH (u:User)-[:POSTED]->(p:Post)
+      WHERE 'HATE' IN p.labels AND p.timestamp >= datetime($start) AND p.timestamp < datetime($end)
+      RETURN DISTINCT u.user_id AS user_id ORDER BY user_id LIMIT $limit
+  - id: q02
+    category: label
+    status: drafted
+    question: "How many spam-labelled posts are there?"
+    params: {label: "SPAM"}
+    key_columns: [n]
+    gold_cypher: |
+      MATCH (p:Post) WHERE 'SPAM' IN p.labels RETURN count(p) AS n LIMIT $limit
+  - id: q03
+    category: aggregation
+    status: drafted
+    question: "Which 10 users posted the most posts?"
+    params: {limit: 10}
+    key_columns: [user_id]
+    gold_cypher: |
+      MATCH (u:User)-[:POSTED]->(p:Post)
+      RETURN u.user_id AS user_id, count(p) AS posts ORDER BY posts DESC, user_id LIMIT $limit
+  - id: q04
+    category: date
+    status: drafted
+    question: "How many posts were published on election day?"
+    params: {start: "2025-03-14T18:30:00+00:00", end: "2025-03-15T18:30:00+00:00"}
+    key_columns: [n]
+    gold_cypher: |
+      MATCH (p:Post) WHERE p.timestamp >= datetime($start) AND p.timestamp < datetime($end)
+      RETURN count(p) AS n LIMIT $limit
+  - id: q05
+    category: amplification
+    status: drafted
+    question: "Which users retweeted the same author's posts at least 3 times?"
+    params: {}
+    key_columns: [amplifier]
+    gold_cypher: |
+      MATCH (amp:User)-[r:RETWEETED]->(p:Post)<-[:POSTED]-(a:User)
+      WHERE amp <> a
+      WITH amp, a, count(r) AS times WHERE times >= 3
+      RETURN DISTINCT amp.user_id AS amplifier ORDER BY amplifier LIMIT $limit
+  - id: q06
+    category: community
+    status: drafted
+    question: "How many users are in each community?"
+    params: {community_property: "louvain_community"}
+    key_columns: [community, users]
+    gold_cypher: |
+      MATCH (u:User) WHERE u[$community_property] IS NOT NULL
+      RETURN u[$community_property] AS community, count(*) AS users ORDER BY community LIMIT $limit
+  - id: q07
+    category: community+label
+    status: drafted
+    question: "Which communities have more than 20 percent hate-labelled posts?"
+    params: {community_property: "louvain_community"}
+    key_columns: [community]
+    gold_cypher: |
+      MATCH (u:User)-[:POSTED]->(p:Post) WHERE u[$community_property] IS NOT NULL
+      WITH u[$community_property] AS community, collect(p) AS posts
+      WITH community, toFloat(size([x IN posts WHERE 'HATE' IN x.labels])) / size(posts) AS share
+      WHERE share > 0.2
+      RETURN community, share ORDER BY share DESC LIMIT $limit
+  - id: q08
+    category: path
+    status: drafted
+    question: "Which users did user u_0001 retweet?"
+    params: {user_id: "u_0001"}
+    key_columns: [user_id]
+    gold_cypher: |
+      MATCH (:User {user_id: $user_id})-[:RETWEETED]->(:Post)<-[:POSTED]-(o:User)
+      RETURN DISTINCT o.user_id AS user_id ORDER BY user_id LIMIT $limit
+  - id: q09
+    category: hashtag
+    status: drafted
+    question: "What are the 5 most used hashtags in spam posts?"
+    params: {limit: 5}
+    key_columns: [tag]
+    gold_cypher: |
+      MATCH (p:Post)-[:USES_HASHTAG]->(h:Hashtag) WHERE 'SPAM' IN p.labels
+      RETURN h.tag AS tag, count(*) AS n ORDER BY n DESC, tag LIMIT $limit
+  - id: q10
+    category: label+date
+    status: drafted
+    question: "How many community-targeted posts were made after the election?"
+    params: {start: "2025-03-15T18:30:00+00:00", end: "2025-03-25T18:30:00+00:00"}
+    key_columns: [n]
+    gold_cypher: |
+      MATCH (p:Post) WHERE 'COMMUNITY_TARGETED' IN p.labels
+        AND p.timestamp >= datetime($start) AND p.timestamp < datetime($end)
+      RETURN count(p) AS n LIMIT $limit

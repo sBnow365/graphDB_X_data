@@ -1,0 +1,19 @@
+# backend: source_labels -> use labels already present in the dataset (no model download)
+#          transformer   -> Hugging Face sequence-classification checkpoint
+backend: source_labels
+transformer:
+  # Candidate checkpoint trained on HateXplain. VERIFY its label names, license and
+  # suitability on its model card before use; the code also checks id2label at load time.
+  model_name: "Hate-speech-CNERG/bert-base-uncased-hatexplain"
+  label_mapping_key: hf_hatexplain_model
+  max_length: 128
+  batch_size: 32
+  device: auto            # auto | cpu | cuda
+  min_confidence: 0.0     # predictions below this become UNKNOWN (analytical choice)
+  cache_dir: .cache/predictions
+fine_tuning:              # OPTIONAL (scripts/train_classifier.py)
+  base_model: "bert-base-uncased"
+  epochs: 3
+  learning_rate: 2.0e-5
+  batch_size: 16
+  output_dir: outputs/models/classifier

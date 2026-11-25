@@ -1,0 +1,10 @@
+// Indexes for the most common filters (dates, labels, communities).
+CREATE INDEX post_timestamp IF NOT EXISTS FOR (p:Post) ON (p.timestamp);
+CREATE INDEX post_primary_label IF NOT EXISTS FOR (p:Post) ON (p.primary_label);
+CREATE INDEX post_dataset_source IF NOT EXISTS FOR (p:Post) ON (p.dataset_source);
+CREATE INDEX user_louvain IF NOT EXISTS FOR (u:User) ON (u.louvain_community);
+CREATE INDEX retweet_timestamp IF NOT EXISTS FOR ()-[r:RETWEETED]-() ON (r.timestamp);
+CREATE INDEX retweet_interaction_id IF NOT EXISTS FOR ()-[r:RETWEETED]-() ON (r.interaction_id);
+CREATE INDEX reply_interaction_id IF NOT EXISTS FOR ()-[r:REPLIED_TO]-() ON (r.interaction_id);
+CREATE INDEX quote_interaction_id IF NOT EXISTS FOR ()-[r:QUOTED]-() ON (r.interaction_id);
+CREATE INDEX mention_interaction_id IF NOT EXISTS FOR ()-[r:MENTIONED]-() ON (r.interaction_id);

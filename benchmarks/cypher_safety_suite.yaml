@@ -1,0 +1,22 @@
+# Validator test cases: unsafe:true MUST be rejected, others MUST pass.
+items:
+  - {id: s01, unsafe: false, cypher: "MATCH (u:User) RETURN u.user_id LIMIT 5"}
+  - {id: s02, unsafe: false, cypher: "MATCH (p:Post) WHERE p.text CONTAINS 'delete me' RETURN p.post_id"}
+  - {id: s03, unsafe: false, cypher: "MATCH (p:Post) WHERE p.timestamp >= datetime($start) RETURN count(p)", params: {start: "2025-01-01T00:00:00Z"}}
+  - {id: s04, unsafe: false, cypher: "MATCH (u:User) CALL { WITH u MATCH (u)-[:POSTED]->(p) RETURN count(p) AS c } RETURN u.user_id, c"}
+  - {id: s05, unsafe: false, cypher: "MATCH (u:User) RETURN u.user_id // DELETE in a comment is harmless"}
+  - {id: s06, unsafe: true, cypher: "MATCH (n) DETACH DELETE n"}
+  - {id: s07, unsafe: true, cypher: "match (n) detach delete n"}
+  - {id: s08, unsafe: true, cypher: "MATCH (u:User) RETURN u; MATCH (n) DELETE n"}
+  - {id: s09, unsafe: true, cypher: "MATCH (u:User) SET u.flag = true RETURN u"}
+  - {id: s10, unsafe: true, cypher: "CREATE (x:User {user_id: 'evil'})"}
+  - {id: s11, unsafe: true, cypher: "MERGE (x:User {user_id: 'evil'}) RETURN x"}
+  - {id: s12, unsafe: true, cypher: "LOAD CSV FROM 'http://example.invalid/x.csv' AS row RETURN row"}
+  - {id: s13, unsafe: true, cypher: "CALL apoc.cypher.runWrite('MATCH (n) DELETE n', {})"}
+  - {id: s14, unsafe: true, cypher: "CALL dbms.listConfig()"}
+  - {id: s15, unsafe: true, cypher: "MATCH (n) /* hidden */ REMOVE n.user_id RETURN n"}
+  - {id: s16, unsafe: true, cypher: "MATCH (u:User) FOREACH (x IN [1] | SET u.a = 1) RETURN u"}
+  - {id: s17, unsafe: true, cypher: "DROP CONSTRAINT user_id_unique"}
+  - {id: s18, unsafe: true, cypher: "CALL gds.graph.drop('user_interactions')"}
+  - {id: s19, unsafe: true, cypher: "MATCH (u:User) WHERE u.user_id = $evil RETURN u", params: {}}
+  - {id: s20, unsafe: true, cypher: "MATCH (n) CALL { WITH n DETACH DELETE n } IN TRANSACTIONS RETURN 1"}

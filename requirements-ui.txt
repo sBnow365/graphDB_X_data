@@ -1,0 +1,4 @@
+# Dashboard (app/streamlit_app.py)
+streamlit>=1.40,<2
+plotly>=5.20
+pyvis>=0.3.2

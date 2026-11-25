@@ -1,0 +1,13 @@
+# Graph-RAG routing + grounding benchmark (SYNTHETIC data).
+# expected_intent: the template route the intent parser should choose (null = Text-to-Cypher).
+items:
+  - {id: r01, question: "Which users posted hate-labelled content during the ten days before the election?", expected_intent: users_posting_label_in_range, expected_labels: [HATE]}
+  - {id: r02, question: "Which communities contain a high proportion of hate-labelled posts?", expected_intent: community_stats, expected_labels: [HATE]}
+  - {id: r03, question: "Which users have high structural influence in community 2?", expected_intent: top_users_in_community}
+  - {id: r04, question: "Which users repeatedly amplified the same posts?", expected_intent: repeated_amplifiers}
+  - {id: r05, question: "How did the network change before, during, and after the election?", expected_intent: temporal_comparison}
+  - {id: r06, question: "Explain the graph evidence behind community 2", expected_intent: community_evidence}
+  - {id: r07, question: "Show communities associated with hate or spam propagation during the ten days before the election", expected_intent: community_stats, expected_labels: [HATE, SPAM]}
+  - {id: r08, question: "Which communities showed increasing hate activity?", expected_intent: temporal_comparison, expected_labels: [HATE]}
+  - {id: r09, question: "Who are the most active users?", expected_intent: posts_per_user}
+  - {id: r10, question: "What hashtags appear most in spam posts?", expected_intent: null, expected_labels: [SPAM]}

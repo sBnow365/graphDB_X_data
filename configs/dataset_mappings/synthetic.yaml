@@ -1,0 +1,7 @@
+dataset_source: synthetic
+role: graph_and_classifier
+files:
+  users: data/synthetic/users.csv
+  posts: data/synthetic/posts.csv
+  interactions: data/synthetic/interactions.csv
+capabilities: {text: true, user_ids: true, timestamps: true, interactions: true, follows: false, labels: true}

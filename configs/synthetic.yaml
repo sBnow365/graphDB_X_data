@@ -1,0 +1,18 @@
+# Synthetic data generator settings. All records are flagged synthetic=true.
+seed: 42
+n_users: 300
+n_communities: 5
+election_date: "2025-03-15"   # fictional; matches temporal.yaml default
+days_before: 45
+days_after: 15
+mean_posts_per_user: 8
+intra_community_interaction_prob: 0.85
+interactions_per_post_mean: 2.0
+# Planted community profiles (label probabilities per post). Purely synthetic.
+community_profiles:
+  - {name: civic_discussion, NORMAL: 0.92, OFFENSIVE: 0.05, HATE: 0.02, SPAM: 0.01, pre_election_hate_ramp: 0.0}
+  - {name: sports_fans,      NORMAL: 0.85, OFFENSIVE: 0.12, HATE: 0.01, SPAM: 0.02, pre_election_hate_ramp: 0.0}
+  - {name: hostile_cluster,  NORMAL: 0.45, OFFENSIVE: 0.20, HATE: 0.30, SPAM: 0.05, pre_election_hate_ramp: 0.25}
+  - {name: promo_network,    NORMAL: 0.30, OFFENSIVE: 0.03, HATE: 0.02, SPAM: 0.65, pre_election_hate_ramp: 0.0}
+  - {name: mixed_politics,   NORMAL: 0.70, OFFENSIVE: 0.15, HATE: 0.10, SPAM: 0.05, pre_election_hate_ramp: 0.10}
+community_targeted_given_hate: 0.7

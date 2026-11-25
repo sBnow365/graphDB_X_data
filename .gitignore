@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+# Secrets
+.env
+# Data (raw data may be licensed; never commit it)
+data/raw/*
+data/interim/*
+data/processed/*
+data/external/*
+!data/**/.gitkeep
+# Synthetic data is reproducible from the seed, so it is not committed either
+data/synthetic/*
+# Outputs
+outputs/**/*
+!outputs/**/.gitkeep
+# Model caches
+.cache/
+hf_cache/
+# OS / editor
+.DS_Store
+Thumbs.db
+DOCUMENTATION.docx
+DOCUMENTATION.md

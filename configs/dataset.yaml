@@ -1,0 +1,24 @@
+# Which dataset feeds the GRAPH (users/posts/interactions).
+#active_graph_dataset: synthetic      # synthetic | twibot22
+active_graph_dataset: russian_trolls
+# Which dataset feeds the CLASSIFIER (train/eval only, never joined to the graph).
+active_classifier_dataset: hatexplain  # hatexplain | hasoc
+canonical_tables:
+  users:
+    required: [user_id, dataset_source, synthetic]
+    optional: [username, source_bot_label]
+  posts:
+    required: [post_id, user_id, timestamp, dataset_source, synthetic]
+    optional: [text, language, source_labels, conversation_id]
+  interactions:
+    required: [interaction_id, interaction_type, timestamp, dataset_source, synthetic]
+    optional: [source_user_id, source_post_id, target_post_id, target_user_id]
+  classification_posts:   # schema for classifier-only datasets (HateXplain/HASOC)
+    required: [post_id, text, source_labels, dataset_source]
+    optional: [group_id, split, language]
+interaction_types: [RETWEETED, REPLIED_TO, QUOTED, MENTIONED]
+splits:
+  train: 0.8
+  val: 0.1
+  test: 0.1
+  group_column: group_id     # if present, group-aware split prevents leakage

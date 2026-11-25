@@ -1,0 +1,12 @@
+# Election date MUST be supplied by you (verified source) or left as the synthetic default.
+# The synthetic default is a FICTIONAL date used only with synthetic data.
+# election_date: "2025-03-15"
+# timezone: "Asia/Kolkata"       # IANA timezone used to interpret window boundaries
+election_date: "2016-11-08"
+timezone: America/New_York
+windows:                        # offsets in days relative to election day (end exclusive)
+  - {name: pre_30_to_11, start_offset: -30, end_offset: -10}
+  - {name: pre_10_to_1,  start_offset: -10, end_offset: 0}
+  - {name: election_day, start_offset: 0,   end_offset: 1}
+  - {name: post_1_to_10, start_offset: 1,   end_offset: 11}
+min_posts_per_window: 1

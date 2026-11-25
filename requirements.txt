@@ -1,0 +1,17 @@
+# Core requirements: enough for synthetic data, Neo4j, GDS, temporal analysis,
+# Text-to-Cypher (via HTTP endpoint) and all unit tests.
+# Tested Python: 3.11 recommended (3.10-3.12 should work).
+pandas>=2.1,<4
+numpy>=1.26
+PyYAML>=6.0             # all congig files are in yaml
+python-dotenv>=1.0      #reads .env
+neo4j>=5.20,<6          #talk to Neo4j
+requests>=2.31          #sending prompts to qwen LLM over http
+scikit-learn>=1.3       # for evaluation metrics of classification
+networkx>=3.2           #fallback
+matplotlib>=3.8         #plotting 
+tzdata>=2024.1          # timezone database (required on Windows for zoneinfo)
+openpyxl>=3.1           # reading HASOC .xlsx files
+ijson>=3.2              # streaming large TwiBot-22 JSON files
+tqdm>=4.66              # for progress bars
+pytest>=8.0             #for running unit and integration tests

@@ -1,0 +1,36 @@
+# Project label taxonomy. MULTI-LABEL: a post may carry several labels
+# (e.g. HATE + COMMUNITY_TARGETED). SPAM is a different axis from HATE/OFFENSIVE.
+labels:
+  NORMAL: "No hateful, offensive, targeted or spam content identified."
+  HATE: "Attacks or dehumanises people based on a protected characteristic."
+  OFFENSIVE: "Insulting, abusive or profane, without meeting the hate definition."
+  COMMUNITY_TARGETED: "Content directed at a specific identity community (from target annotations)."
+  SPAM: "Unsolicited, repetitive, promotional or deceptive bulk content."
+  UNKNOWN: "Unlabelled, or a source label that has no documented mapping."
+# Priority used to pick a single 'primary_label' for display (first match wins).
+primary_label_priority: [HATE, OFFENSIVE, SPAM, COMMUNITY_TARGETED, NORMAL, UNKNOWN]
+# Explicit, documented source->project label mappings. Anything unmapped -> UNKNOWN
+# and the original label is preserved in source_labels.
+mappings:
+  synthetic:
+    NORMAL: [NORMAL]
+    HATE: [HATE]
+    OFFENSIVE: [OFFENSIVE]
+    SPAM: [SPAM]
+    COMMUNITY_TARGETED: [COMMUNITY_TARGETED]
+  hatexplain:            # majority vote of annotators
+    hatespeech: [HATE]
+    offensive: [OFFENSIVE]
+    normal: [NORMAL]
+    # A non-'None' target community adds COMMUNITY_TARGETED (handled in adapter)
+  hasoc:
+    NOT: [NORMAL]
+    HOF: [OFFENSIVE]     # coarse task: hate-OR-offensive; refined by fine-grained task if present
+    HATE: [HATE]
+    OFFN: [OFFENSIVE]
+    PRFN: [OFFENSIVE]    # profane -> OFFENSIVE (documented analytical choice)
+    NONE: [NORMAL]
+  hf_hatexplain_model:   # label strings of the default HF checkpoint (verified at load time)
+    "hate speech": [HATE]
+    "offensive": [OFFENSIVE]
+    "normal": [NORMAL]

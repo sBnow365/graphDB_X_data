@@ -1,0 +1,19 @@
+# Official title is preserved exactly. Subtitle is a PROPOSAL pending mentor approval.
+official_title: "Graph-Enhanced Language Models for Scientific Literature"
+proposed_subtitle: "A Graph-RAG and Neo4j Framework for Identifying Candidate Hate/Spam Propagation Communities on X Around Election Periods"
+scope_decision: "X/social-media focus, as reported by the student from mentor discussion. Title change not yet approved."
+random_seed: 42
+log_level: INFO
+paths:
+  raw: data/raw
+  interim: data/interim
+  processed: data/processed
+  synthetic: data/synthetic
+  outputs: outputs
+  metrics: outputs/metrics
+  figures: outputs/figures
+  graphs: outputs/graphs
+  logs: outputs/logs
+privacy:
+  log_post_text: false        # never write full post text into logs
+  evidence_text_max_chars: 160 # truncate post text shown to the LLM / in answers

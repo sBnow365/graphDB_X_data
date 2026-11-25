@@ -1,0 +1,7 @@
+source_id,relation,target_id
+u1,post,t1
+t2,retweeted,t1
+t3,replied_to,t1
+t1,mentioned,u3
+u2,following,u1
+u9,unknown_rel,t1

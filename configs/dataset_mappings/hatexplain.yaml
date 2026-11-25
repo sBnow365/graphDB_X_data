@@ -1,0 +1,15 @@
+# HateXplain (Mathew et al., AAAI 2021). MIT license. https://github.com/hate-alert/HateXplain
+# Download Data/dataset.json and Data/post_id_divisions.json into data/raw/hatexplain/
+dataset_source: hatexplain
+role: classifier_only     # NO user IDs, NO timestamps, NO interaction edges
+files:
+  dataset_json: data/raw/hatexplain/dataset.json
+  divisions_json: data/raw/hatexplain/post_id_divisions.json   # official train/val/test ids
+fields:                      # keys inside each post record [verify against Data/README.md]
+  tokens: post_tokens
+  annotators: annotators
+  annotator_label: label
+  annotator_target: target
+label_aggregation: majority  # posts with no majority (3-way tie) are labelled UNKNOWN
+no_target_values: ["None", "none", ""]
+capabilities: {text: true, user_ids: false, timestamps: false, interactions: false, follows: false, labels: true}

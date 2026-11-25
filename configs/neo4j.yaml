@@ -1,0 +1,6 @@
+database: neo4j
+batch_size: 1000
+read_timeout_seconds: 30
+write_timeout_seconds: 300
+constraints_file: cypher/01_constraints.cypher
+indexes_file: cypher/02_indexes.cypher

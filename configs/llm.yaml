@@ -1,0 +1,43 @@
+# # Backend: openai_compatible (Ollama / llama.cpp / vLLM / Colab tunnel / remote)
+# #          hf_transformers   (load weights in this Python process; GPU recommended)
+# #          mock              (deterministic, for tests and offline demos)
+# # Environment variables LLM_BACKEND / LLM_BASE_URL / LLM_MODEL / LLM_API_KEY override these.
+# backend: openai_compatible
+# base_url: "http://localhost:11434/v1"
+# model: "qwen3:8b"
+# hf_model_id: "Qwen/Qwen3-8B"
+# load_in_4bit: true
+# temperature: 0.0
+# max_tokens: 768
+# timeout_seconds: 120
+# disable_thinking: true     # Qwen3: use non-thinking mode for Cypher/answers
+# text_to_cypher:
+#   max_retries: 1
+#   max_rows: 200
+#   query_timeout_seconds: 20
+#   allowed_procedures: []   # read-only QA mode: no procedure CALLs allowed by default
+# answer:
+#   max_evidence_items: 40
+
+
+# Backend: openai_compatible (Ollama / llama.cpp / vLLM / Colab tunnel / remote)
+#          hf_transformers   (load weights in this Python process; GPU recommended)
+#          mock              (deterministic, for tests and offline demos)
+# Environment variables LLM_BACKEND / LLM_BASE_URL / LLM_MODEL / LLM_API_KEY override these.
+backend: openai_compatible
+base_url: "http://localhost:11434/v1"
+model: "qwen3:8b"
+hf_model_id: "Qwen/Qwen3-8B"
+load_in_4bit: true
+temperature: 0.0
+max_tokens: 2048
+timeout_seconds: 120
+disable_thinking: true     # Qwen3: non-thinking mode (sends Ollama think=false + vLLM enable_thinking=false)
+extra_body: {}             # extra JSON fields for your server, e.g. {reasoning_effort: none}
+text_to_cypher:
+  max_retries: 1
+  max_rows: 200
+  query_timeout_seconds: 20
+  allowed_procedures: []   # read-only QA mode: no procedure CALLs allowed by default
+answer:
+  max_evidence_items: 40

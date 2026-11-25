@@ -1,0 +1,27 @@
+# TwiBot-22 (Feng et al., NeurIPS 2022 D&B). Access by application; research use only.
+# Place files in data/raw/twibot22/. Field names below follow the repository's format
+# description [verify against the dataset README after you receive access].
+dataset_source: twibot22
+role: graph                 # labels are BOT/HUMAN, NOT hate. Never treat them as hate labels.
+files:
+  users: data/raw/twibot22/user.json
+  tweets_glob: data/raw/twibot22/tweet_*.json
+  edges: data/raw/twibot22/edge.csv
+  labels: data/raw/twibot22/label.csv
+user_fields: {id: id, username: username}
+tweet_fields: {id: id, author_id: author_id, text: text, created_at: created_at, lang: lang}
+edge_columns: {source: source_id, relation: relation, target: target_id}
+# relation name in edge.csv -> canonical meaning
+relation_map:
+  post: POSTED              # user -> tweet
+  retweeted: RETWEETED      # tweet -> tweet (the retweet points to the original)
+  quoted: QUOTED            # tweet -> tweet
+  replied_to: REPLIED_TO    # tweet -> tweet
+  mentioned: MENTIONED      # tweet -> user
+  followers: FOLLOWS_REVERSED
+  following: FOLLOWS
+sampling:                   # TwiBot-22 is very large; sample for a laptop
+  max_tweets: 200000
+  max_users: 50000
+  seed: 42
+capabilities: {text: true, user_ids: true, timestamps: true, interactions: true, follows: true, labels: false}

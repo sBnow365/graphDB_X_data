@@ -1,0 +1,15 @@
+# Hateful Users on Twitter (Ribeiro et al., ICWSM 2018). Kaggle: manoelribeiro/hateful-users-on-twitter
+# Licence shown on Kaggle: CC0 Public Domain [check the Kaggle page]. Cite the paper.
+dataset_source: hateful_users
+role: graph            # User->User retweet graph + user-level human labels; no posts/timestamps
+files:
+  users: data/raw/hateful_users/users_neighborhood_anon.csv
+  edges: data/raw/hateful_users/users.edges
+columns:
+  id: user_id
+  label: hate          # values: hateful / normal / other
+label_map:             # 'other' = not annotated -> left empty
+  hateful: HATEFUL
+  normal: NORMAL
+id_prefix: "hu_"
+capabilities: {text: false, user_ids: true, timestamps: false, interactions: true, follows: false, labels: true}

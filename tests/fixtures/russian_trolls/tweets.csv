@@ -1,0 +1,7 @@
+"user_id","user_key","created_at","created_str","retweet_count","retweeted","favorite_count","text","tweet_id","source","hashtags","expanded_urls","posted","mentions","retweeted_status_id","in_reply_to_status_id"
+"1","TrollA","1476000000000","2016-10-09 08:00:00","","","","Fixture text mentioning @CandidateX #election","101","","[""election""]","[]","POSTED","[""candidatex""]","",""
+"2","TrollB","","2016-10-10 09:00:00","","","","RT @TrollA: Fixture text mentioning @CandidateX","102","","[]","[]","POSTED","[""troll_a_alias"", ""trolla""]","101",""
+"2","TrollB","","2016-10-11 09:00:00","","","","RT @OutsiderC: fixture amplified outsider post","103","","[]","[]","POSTED","[""outsiderc""]","999",""
+"1","TrollA","","2016-10-12 10:00:00","","","","@TrollB fixture reply","104","","[]","[]","POSTED","[""trollb""]","","102"
+"3","TrollC","","2015-01-01 10:00:00","","","","outside the sampling window","105","","[]","[]","POSTED","[]","",""
+"3","TrollC","","2016-10-13 10:00:00","","","","no tweet id row","","","[]","[]","POSTED","[]","",""

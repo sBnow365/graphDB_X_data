@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graph-enhanced-lm"
+version = "0.1.0"
+description = "Graph-Enhanced Language Models for Scientific Literature: graph-RAG and Neo4j analysis of candidate hate/spam propagation communities on X."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.1,<4", "numpy>=1.26", "PyYAML>=6.0", "python-dotenv>=1.0",
+  "neo4j>=5.20,<6", "requests>=2.31", "scikit-learn>=1.3", "networkx>=3.2",
+  "matplotlib>=3.8", "tzdata>=2024.1", "openpyxl>=3.1", "ijson>=3.2", "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+classifier = ["transformers>=4.45", "accelerate>=0.30"]
+llm-local = ["transformers>=4.51", "accelerate>=0.30", "bitsandbytes>=0.43"]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "integration: needs a live Neo4j (and sometimes GDS or an LLM endpoint); skipped automatically otherwise",
+]

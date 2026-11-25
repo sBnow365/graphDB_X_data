@@ -1,0 +1,22 @@
+# NBC News "Russian troll tweets" (Feb 2018), mirrored at github.com/loretoparisi/russian_trolls_tweets_dataset
+# Cite NBC News (B. Popken, 14 Feb 2018). Contains real handles: do not publish identities in reports.
+dataset_source: russian_trolls
+role: graph
+files:
+  tweets: data/raw/russian_trolls/tweets.csv
+  users: data/raw/russian_trolls/users.csv
+tweet_columns:
+  tweet_id: tweet_id
+  screen_name: user_key
+  text: text
+  created_str: created_str        # "2016-03-22 18:31:42" (treated as UTC)
+  created_at_ms: created_at       # epoch milliseconds fallback
+  mentions: mentions
+  retweeted_status_id: retweeted_status_id
+  in_reply_to_status_id: in_reply_to_status_id
+sampling:                         # keep CPU classification feasible; widen on Colab
+  date_from: "2016-09-01"
+  date_to: "2016-12-01"
+  max_tweets: 50000      # ~2/3 of the Sep-Dec 2016 window; 454 users total, so Louvain stays fast
+  seed: 42
+capabilities: {text: true, user_ids: true, timestamps: true, interactions: true, follows: false, labels: false}

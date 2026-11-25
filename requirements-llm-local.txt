@@ -1,0 +1,5 @@
+# Optional: run Qwen directly with Hugging Face transformers (mainly for Colab/Linux GPUs).
+# Most users should use an OpenAI-compatible server instead (see docs/QWEN_SETUP.md).
+transformers>=4.51      # Qwen3 support was added in recent transformers releases [verify on model card]
+accelerate>=0.30
+bitsandbytes>=0.43      # 4-bit quantization; Linux/Colab GPU
