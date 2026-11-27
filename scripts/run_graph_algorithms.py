@@ -30,13 +30,13 @@ def main() -> None:
     args = ap.parse_args()
     cfg = get_config()
     setup_logging(cfg.project["log_level"], cfg.path("logs"), "gds")
-    g, pcfg = cfg.gds, cfg.gds["projection"]
+    g, pcfg = cfg.gds, cfg.gds["projection"] #g to get GDS settings,pcfg sub dictionary of g
     run_id = new_run_id("louvain")
     report = {"run_id": run_id}
     with connect(cfg) as client:
         report["gds"] = gds_info(client)
         proj = project_interaction_graph(client, pcfg["name"], pcfg["weights"],
-                                         include_isolated=pcfg.get("include_isolated_users", False),
+                                         include_isolated=pcfg.get("include_isolated_users", False), #not including nodes with no interactions
                                          max_relationships=pcfg.get("max_relationships_guard"))
         report["projection"] = proj
         report["memory_estimate_louvain"] = estimate(client, pcfg["name"], "louvain")
@@ -57,7 +57,7 @@ def main() -> None:
         assign.to_csv(cfg.path("metrics") / "community_assignments.csv", index=False)
         report["size_distribution"] = community_size_distribution(assign)
         users_csv = processed_dir(cfg, cfg.dataset["active_graph_dataset"]) / "users.csv"
-        if cfg.dataset["active_graph_dataset"] == "synthetic" and users_csv.exists():
+        if cfg.dataset["active_graph_dataset"] == "synthetic" and users_csv.exists(): # not relevant to russian trolls
             truth = pd.read_csv(users_csv, dtype=str)
             report["synthetic_ground_truth_recovery"] = ground_truth_recovery(assign, truth)
     save_json(report, cfg.path("metrics") / f"graph_algorithms_{run_id}.json")

@@ -19,7 +19,7 @@ def main() -> None:
     args = ap.parse_args()
     cfg = get_config()
     setup_logging(cfg.project["log_level"], cfg.path("logs"), "ingest")
-    with connect(cfg) as client:
+    with connect(cfg) as client: #initializing connection to Neo4j ->client returned
         report = ingest(cfg, args.dataset, client)
         print(json.dumps(report, indent=2, default=str))
         v = validate_graph(client)
