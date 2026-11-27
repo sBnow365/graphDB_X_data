@@ -1,4 +1,9 @@
+Docker Desktop installed and running (for Neo4j).
+Python 3.10–3.12 installed (with "Add python.exe to PATH" checked).
+python --version
+
 python -m venv .venv                #done once
+py -3.11 -m venv .venvc             # do this for the current python version that is downloaded
 .venv\Scripts\Activate.ps1          # done every time  you are working on your project PowerShell
 
 pip install -r requirements.txt              # core: pandas, neo4j driver, GDS helpers
