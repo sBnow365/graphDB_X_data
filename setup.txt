@@ -1,0 +1,51 @@
+python -m venv .venv                #done once
+.venv\Scripts\Activate.ps1          # done every time  you are working on your project PowerShell
+
+pip install -r requirements.txt              # core: pandas, neo4j driver, GDS helpers
+pip install -r requirements-classifier.txt   # torch + transformers (BERT HateXplain)
+pip install -r requirements-ui.txt           # streamlit + plotly dashboard
+
+python scripts/download_dataset.py --dataset russian_trolls
+
+python scripts/preprocess_dataset.py --dataset russian_trolls
+python scripts/classify_posts.py --dataset russian_trolls --backend transformer
+
+docker compose down -v
+docker compose up -d #start neo4j + gds
+docker compose ps #container status
+
+python scripts/initialize_neo4j.py
+python scripts/ingest_graph.py --dataset russian_trolls      # full load (idempotent MERGE)
+python scripts/update_graph.py --dataset russian_trolls      # incremental: only new/changed
+
+python scripts/run_graph_algorithms.py
+python scripts/run_community_analysis.py #not necessary
+
+
+after all this is done I need to open the code in run the python notebook in collab and then paste the URL in env?
+in frontend?
+
+a new env file needs to be created and only the LLM base URL needs to be updated
+
+
+NOW if local LLM changes in env required
+LLM_BACKEND=openai_compatible
+LLM_BASE_URL=http://localhost:11434/v1
+LLM_MODEL=qwen3:8b    # replace with the exact name from `ollama list`
+
+python scripts/check_llm.py          # quick test -> should print reply: 'READY'
+streamlit run app/streamlit_app.py   # opens the dashboard in your browser
+
+
+
+Steps to download Local LLM
+
+https://ollama.com/download and install it.
+ollama pull qwen3:8b
+
+ollama pull qwen3:1.7b #for weak laptops
+
+python scripts/check_llm.py #to check if Ollama is running
+(Get-ChildItem .cache\predictions -Filter *.json | Measure-Object).Count #count of how many classified 
+python -m streamlit run app/streamlit_app.py #for  streamlit UI
+http://localhost:7474 #for Neo4j desktop
