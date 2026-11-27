@@ -11,7 +11,8 @@ venv/
 data/raw/*
 data/interim/*
 data/processed/*
-data/external/*
+!data/processed/russian_trolls/
+!data/processed/russian_trolls/**data/external/*
 !data/**/.gitkeep
 # Synthetic data is reproducible from the seed, so it is not committed either
 data/synthetic/*

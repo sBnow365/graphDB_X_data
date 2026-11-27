@@ -1,0 +1,33 @@
+{
+  "dataset": "russian_trolls",
+  "errors": [],
+  "warnings": [
+    "posts.user_id: 172 missing value(s)",
+    "posts.timestamp: 20663 missing value(s)",
+    "posts: 20394 post(s) reference unknown users (they will be created as bare User nodes)",
+    "interactions.target_user_id: 17434 reference(s) to unknown users"
+  ],
+  "stats": {
+    "users": 344,
+    "posts": 70609,
+    "interactions": 40685,
+    "users.user_id.missing": 0,
+    "users.dataset_source.missing": 0,
+    "users.synthetic.missing": 0,
+    "posts.post_id.missing": 0,
+    "posts.user_id.missing": 172,
+    "posts.timestamp.missing": 20663,
+    "posts.dataset_source.missing": 0,
+    "posts.synthetic.missing": 0,
+    "interactions.interaction_id.missing": 0,
+    "interactions.interaction_type.missing": 0,
+    "interactions.timestamp.missing": 0,
+    "interactions.dataset_source.missing": 0,
+    "interactions.synthetic.missing": 0,
+    "users.duplicate_user_id": 0,
+    "posts.duplicate_post_id": 0,
+    "interactions.duplicate_interaction_id": 0,
+    "posts.time_range": "2016-09-01T00:00:04+00:00 -> 2016-11-30T21:47:29+00:00"
+  },
+  "ok": true
+}

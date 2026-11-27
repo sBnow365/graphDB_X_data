@@ -1,0 +1,21 @@
+{
+  "name": "russian_trolls",
+  "users": 344,
+  "posts": 70609,
+  "interactions": 40685,
+  "follows": 0,
+  "user_edges": 0,
+  "capabilities": {
+    "text": true,
+    "user_ids": true,
+    "timestamps": true,
+    "interactions": true,
+    "follows": false,
+    "labels": false
+  },
+  "notes": [
+    "All authors are IRA-linked accounts (dataset definition); others appear as placeholders.",
+    "Retweeted-post authors are INFERRED from the 'RT @name:' prefix.",
+    "No content labels: run the classifier (label_source=model)."
+  ]
+}
